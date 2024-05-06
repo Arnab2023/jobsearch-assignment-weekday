@@ -9,8 +9,10 @@ Currently, two official plugins are available:
 
 ## As this project is created in Vite using React:
 
-1.To run this type "npm run dev" on the terminal.
-2.For Running the app locallly use this URL : http://localhost:5173/.
+1.Please install the node modules by running the script "npm i" on the terminal as I restricted the modules to be uploaded on GitHub in
+.gitignore file.
+2.To run this type "npm run dev" on the terminal.
+3.For Running the app locallly use this URL : http://localhost:5173/.
 
 # React useFilter Hook
 
