@@ -10,6 +10,7 @@ const Filter = ({ job, setData }) => {
   const [remoteList, setRemoteList] = useState([]);
   const [expList, setExpList] = useState([]);
   const [salList, setSalList] = useState([]);
+  const [company, setCompany] = useState("");
 
   const { data, addFilter, removeFilter, resetFilters } = useFilter(job);
   const [content, setContent] = useState({
@@ -61,6 +62,8 @@ const Filter = ({ job, setData }) => {
     }
   };
 
+  const filterByCom = (operand, item) =>
+    item.companyName.toLowerCase().includes(operand.toLowerCase());
   //--------------------------------------------------------insertFunctions------------------------------------------------//
 
   const insertFunctions = (listName, item) => {
@@ -92,7 +95,11 @@ const Filter = ({ job, setData }) => {
     if (remoteList.length > 0) {
       addFilter({ operand: remoteList, opcode: filterByRem });
     }
-  }, [expList, salList, remoteList]);
+
+    if (company.length > 0) {
+      addFilter({ operand: company, opcode: filterByCom });
+    }
+  }, [expList, salList, remoteList, company]);
 
   useEffect(() => {
     setData(data);
@@ -276,6 +283,7 @@ const Filter = ({ job, setData }) => {
               value={content.company}
               onChange={(e) => {
                 changeHandle(e, "company");
+                setCompany(e.target.value);
               }}
             />
           </div>
