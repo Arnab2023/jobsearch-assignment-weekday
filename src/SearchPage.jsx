@@ -2,15 +2,16 @@
 import React, { useState, useEffect } from "react";
 import Modal from "./Modal/Modal";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Filter from "./Filter/Filter";
+
 import { Card } from "@mui/material";
 import "./searchpage.css";
 import axios from "axios";
+import Filter from "./Filter/Filter";
 
 const SearchPage = () => {
   const [modal, setModal] = useState(false);
   const [job, setJob] = useState([]);
-  const [offset, setOffset] = useState(12);
+  const [offset, setOffset] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
   const [filterData, setFilterData] = useState();
   const handleModal = () => {
@@ -64,6 +65,7 @@ const SearchPage = () => {
     <div className="container">
       <Filter job={job} setData={setFilterData} />
       {modal && <Modal setModal={setModal} />}
+
       <InfiniteScroll
         className="content"
         dataLength={job?.length || []}
@@ -71,7 +73,7 @@ const SearchPage = () => {
         hasMore={offset <= totalCount}
         loader={"...."}
       >
-        {job?.map((item) => (
+        {filterData?.map((item) => (
           <Card
             key={item?.jdUid}
             sx={{

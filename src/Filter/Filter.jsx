@@ -3,20 +3,23 @@
 import React, { useEffect, useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import CloseIcon from "@mui/icons-material/Close";
+import useFilter from "../util/FilterFunction";
 import "./filter.css";
 
 const Filter = ({ job, setData }) => {
+  const [remoteList, setRemoteList] = useState([]);
+  const [expList, setExpList] = useState([]);
+  const [salList, setSalList] = useState([]);
+
+  const { data, addFilter, removeFilter, resetFilters } = useFilter(job);
   const [content, setContent] = useState({
-    role: "",
     experience: "",
     remote: "",
     salary: "",
-    company: "",
   });
 
   const [show, setShow] = useState({
     experience: false,
-    role: false,
 
     remote: false,
     salary: false,
@@ -28,8 +31,79 @@ const Filter = ({ job, setData }) => {
     salary: ["0L", "10L", "20L", "30L", "40L", "50L", "60L", "70L"],
   };
 
+  //-------------------------------------------------------- filterFunctions---------------------------------------------------//
+
+  const filterByExp = (operand, item) => {
+    if (item.minExp !== null) {
+      return item.minExp <= parseInt(operand[0]);
+    } else {
+      return item.maxExp <= parseInt(operand[0]);
+    }
+  };
+
+  const filterBySal = (operand, item) => {
+    if (item.minJdSalary !== null) {
+      return (
+        item.minJdSalary >= parseInt(operand[0].slice(0, operand[0].length - 1))
+      );
+    } else {
+      return (
+        item.maxJdSalary >= parseInt(operand[0].slice(0, operand[0].length - 1))
+      );
+    }
+  };
+
+  const filterByRem = (operand, item) => {
+    if (operand[0].toLowerCase() === "remote") {
+      return item.location === "remote";
+    } else {
+      return item.location !== "remote";
+    }
+  };
+
+  //--------------------------------------------------------insertFunctions------------------------------------------------//
+
+  const insertFunctions = (listName, item) => {
+    if (listName === "experience") {
+      setExpList([item]);
+    }
+    if (listName === "salary") {
+      setSalList([item]);
+    }
+    if (listName === "remote") {
+      if (remoteList.includes(item)) {
+        setRemoteList([]);
+      } else {
+        setRemoteList([item]);
+      }
+    }
+  };
+  //-------------------------------------------------------applying Filters--------------------------------------------------//
+
+  useEffect(() => {
+    resetFilters();
+
+    if (expList.length > 0) {
+      addFilter({ operand: expList, opcode: filterByExp });
+    }
+    if (salList.length > 0) {
+      addFilter({ operand: salList, opcode: filterBySal });
+    }
+    if (remoteList.length > 0) {
+      addFilter({ operand: remoteList, opcode: filterByRem });
+    }
+  }, [expList, salList, remoteList]);
+
+  useEffect(() => {
+    setData(data);
+  }, [data]);
+
+  //-------------------------------------------------------------Functions---------------------------------------------------//
   const changeHandle = (e, option) => {
     setContent((prev) => ({ ...prev, [option]: e.target.value }));
+    if (content[option].length !== 0) {
+      setShow((prev) => ({ ...prev, [option]: true }));
+    }
   };
 
   const handleShow = (option) => {
@@ -103,6 +177,7 @@ const Filter = ({ job, setData }) => {
                   onClick={() => {
                     setContent((prev) => ({ ...prev, experience: item }));
                     handleShow("experience");
+                    insertFunctions("experience", item);
                   }}
                 >
                   {item}
@@ -142,6 +217,7 @@ const Filter = ({ job, setData }) => {
                   onClick={() => {
                     setContent((prev) => ({ ...prev, remote: "" }));
                     handleShow("remote");
+                    insertFunctions("remote", item);
                   }}
                 >
                   {item}
@@ -180,6 +256,7 @@ const Filter = ({ job, setData }) => {
                   onClick={() => {
                     setContent((prev) => ({ ...prev, salary: item }));
                     handleShow("salary");
+                    insertFunctions("salary", item);
                   }}
                 >
                   {item}
