@@ -100,7 +100,7 @@ const SearchPage = () => {
 
             <p className="est-salary">
               Estimated Salary: ₹{item?.minJdSalary}
-              {item.minJdSalary && ` -`} {item?.maxJdSalary} LPA ⚠️
+              {item.minJdSalary && ` -`} {item?.maxJdSalary} LPA ✅
             </p>
             <p className="comp">About Company:</p>
             <p className="abt-us">About Us</p>

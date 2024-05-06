@@ -6,6 +6,7 @@
   align-items: center;
   font-family: Lexend;
 }
+
 .contain h2 {
   margin-top: 50px;
   font-size: 20px;
@@ -214,5 +215,6 @@
   color: white;
 }
 
-.type .search-cont {
+.border-blue {
+  border: 1px solid blue;
 }

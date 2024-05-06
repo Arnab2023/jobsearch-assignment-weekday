@@ -3,36 +3,48 @@
 import React, { useEffect, useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import CloseIcon from "@mui/icons-material/Close";
-import useFilter from "../util/FilterFunction";
 import "./filter.css";
-
+import useFilter from "../util/FilterFunction";
 const Filter = ({ job, setData }) => {
+  const [roleList, setRoleList] = useState([]);
+  const [empList, setEmpList] = useState([]);
   const [remoteList, setRemoteList] = useState([]);
   const [expList, setExpList] = useState([]);
   const [salList, setSalList] = useState([]);
-  const [company, setCompany] = useState("");
-
+  const [company, setCompany] = useState();
   const { data, addFilter, removeFilter, resetFilters } = useFilter(job);
   const [content, setContent] = useState({
+    role: "",
     experience: "",
     remote: "",
     salary: "",
+    company: "",
   });
 
   const [show, setShow] = useState({
     experience: false,
+    role: false,
 
     remote: false,
     salary: false,
   });
+  const capitalizeFirstLetter = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+  const getUniqueData = (field) => {
+    let labellist = job.map((item) => item[field]);
+    return [...new Set(labellist)];
+  };
 
   const detailObject = {
     experience: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
     remote: ["Remote", "In-office"],
     salary: ["0L", "10L", "20L", "30L", "40L", "50L", "60L", "70L"],
+    role: getUniqueData("jobRole"),
   };
 
   //-------------------------------------------------------- filterFunctions---------------------------------------------------//
+  const filterByRole = (operand, item) => operand.includes(item.jobRole);
 
   const filterByExp = (operand, item) => {
     if (item.minExp !== null) {
@@ -64,9 +76,17 @@ const Filter = ({ job, setData }) => {
 
   const filterByCom = (operand, item) =>
     item.companyName.toLowerCase().includes(operand.toLowerCase());
+
   //--------------------------------------------------------insertFunctions------------------------------------------------//
 
   const insertFunctions = (listName, item) => {
+    if (listName === "role") {
+      if (roleList.includes(item)) {
+        setRoleList((prevList) => prevList.filter((i) => i !== item));
+      } else {
+        setRoleList((prevList) => [...prevList, item]);
+      }
+    }
     if (listName === "experience") {
       setExpList([item]);
     }
@@ -85,7 +105,9 @@ const Filter = ({ job, setData }) => {
 
   useEffect(() => {
     resetFilters();
-
+    if (roleList.length > 0) {
+      addFilter({ operand: roleList, opcode: filterByRole });
+    }
     if (expList.length > 0) {
       addFilter({ operand: expList, opcode: filterByExp });
     }
@@ -96,10 +118,10 @@ const Filter = ({ job, setData }) => {
       addFilter({ operand: remoteList, opcode: filterByRem });
     }
 
-    if (company.length > 0) {
+    if (content.company.length > 0) {
       addFilter({ operand: company, opcode: filterByCom });
     }
-  }, [expList, salList, remoteList, company]);
+  }, [roleList, expList, salList, remoteList, company]);
 
   useEffect(() => {
     setData(data);
@@ -135,11 +157,32 @@ const Filter = ({ job, setData }) => {
     <div className="contain">
       <h2>Search Jobs</h2>
       <div className="fil-cont">
-        {/* --------------------------------------------------- role------------------------------------------------------------------ */}
+        {/* --------------------------------------------------- Role------------------------------------------------------------------ */}
 
         <div className="role-fil fill">
-          <p className="field-name">Roles</p>
+          {content.role.length > 0 && <p className="field-name">Roles</p>}
           <div className="search-cont">
+            {roleList.length > 0 &&
+              roleList.map((item, i) => (
+                <div key={i} className="entry">
+                  <p>{item}</p>
+                  <div
+                    className="close"
+                    onClick={() => {
+                      insertFunctions("role", item);
+                    }}
+                  >
+                    <CloseIcon
+                      sx={{
+                        fontSize: 19,
+                        color: "black",
+                        ":hover": { color: "red" },
+                      }}
+                    />
+                  </div>
+                </div>
+              ))}
+
             <input
               type="text"
               placeholder="Roles"
@@ -147,17 +190,35 @@ const Filter = ({ job, setData }) => {
               onChange={(e) => changeHandle(e, "role")}
             />
 
-            <div className="icon">
+            <div className="icon" onClick={() => handleShow("role")}>
               <KeyboardArrowDownIcon sx={{ color: "black" }} />
             </div>
           </div>
+          {show.role && (
+            <div className="drop-down">
+              {dropChange("role").map((item, index) => (
+                <p
+                  key={index}
+                  className="hover-div"
+                  onClick={() => {
+                    setContent((prev) => ({ ...prev, role: "" }));
+                    handleShow("role");
+                    insertFunctions("role", item);
+                  }}
+                >
+                  {capitalizeFirstLetter(item)}
+                </p>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* --------------------------------------------------- Experience---------------------------------------------------------------------- */}
 
         <div className="expe fill">
-          <p className="field-name">Experience</p>
-
+          {content.experience.length > 0 && (
+            <p className="field-name">Experience</p>
+          )}
           <div className="search-cont">
             <input
               type="text"
@@ -197,8 +258,28 @@ const Filter = ({ job, setData }) => {
         {/* --------------------------------------------------- Type---------------------------------------------------------------------------- */}
 
         <div className="type fill">
-          <p className="field-name">Remote</p>
+          {content.remote.length > 0 && <p className="field-name">Remote</p>}
           <div className="search-cont">
+            {remoteList.length > 0 &&
+              remoteList.map((item, i) => (
+                <div key={i} className="entry">
+                  <p>{item}</p>
+                  <div
+                    className="close"
+                    onClick={() => {
+                      insertFunctions("remote", item);
+                    }}
+                  >
+                    <CloseIcon
+                      sx={{
+                        fontSize: 19,
+                        color: "black",
+                        ":hover": { color: "red" },
+                      }}
+                    />
+                  </div>
+                </div>
+              ))}
             <input
               type="text"
               placeholder="Remote"
@@ -236,7 +317,7 @@ const Filter = ({ job, setData }) => {
 
         {/* --------------------------------------------------- Salary ------------------------------------------------------------------------- */}
         <div className="sal fill">
-          <p className="field-name">Salary</p>
+          {content.salary.length > 0 && <p className="field-name">Salary</p>}
           <div className="search-cont">
             <input
               type="text"
@@ -274,8 +355,9 @@ const Filter = ({ job, setData }) => {
         </div>
         {/* --------------------------------------------------- Comp-Name ---------------------------------------------------------------------- */}
         <div className="comp-name fill">
-          <p className="field-name">Company Name</p>
-
+          {content.company.length > 0 && (
+            <p className="field-name">Company Name</p>
+          )}
           <div className="search-cont">
             <input
               type="text"
