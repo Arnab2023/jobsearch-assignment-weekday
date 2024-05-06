@@ -167,15 +167,6 @@
   margin-bottom: 20px;
 }
 
-/* kuch to backchodi */
-
-/* .content {
-  display: flex;
-  flex-flow: row wrap;
-  gap: 10px;
-  margin-bottom: 50px;
-} */
-
 .content {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
