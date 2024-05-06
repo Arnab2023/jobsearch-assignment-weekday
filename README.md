@@ -14,7 +14,7 @@ Currently, two official plugins are available:
 2.To run this type "npm run dev" on the terminal.
 3.For Running the app locallly use this URL : http://localhost:5173/.
 
-# React useFilter Hook
+# React useFilter Custom Hook
 
 ## Overview
 
