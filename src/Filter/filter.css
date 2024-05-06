@@ -1,0 +1,218 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap");
+.contain {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Lexend;
+}
+.contain h2 {
+  margin-top: 50px;
+  font-size: 20px;
+}
+.fil-cont {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 60px;
+
+  margin-bottom: 30px;
+}
+.entry {
+  display: flex;
+  flex-direction: row;
+  background-color: #c4c1c1;
+  border-radius: 3px;
+  height: 20px;
+  font-size: 11px;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 10px;
+  justify-content: center;
+  align-items: center;
+  padding-left: 4px;
+
+  gap: 2px;
+}
+.close {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+
+  align-items: center;
+
+  width: 21px;
+}
+.close :hover {
+  background-color: #f0927b;
+  border-radius: 3px;
+}
+
+.fill {
+  display: flex;
+  position: relative;
+}
+
+.field-name {
+  position: absolute;
+  width: 100%;
+  top: -20px;
+  font-size: 12px;
+}
+
+.drop-down {
+  position: absolute;
+  top: calc(100% + 1.5px);
+  padding: 5px;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 95%;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  font-weight: 300;
+  border-radius: 3px;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.search-cont {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  border: 1px solid #cccccc;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 3px;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 1px solid #cccccc;
+
+  color: black;
+}
+.role-fil input {
+  font-size: 11px;
+  height: 25px;
+  width: 111px;
+  padding: 4px 6px 4px 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  border: none;
+}
+
+.expe input {
+  font-size: 11px;
+  height: 25px;
+  width: 70px;
+  padding: 4px 6px 4px 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  border: none;
+}
+.expe .drop-down {
+  position: absolute;
+  padding: 5px;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 107px;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  font-weight: 300;
+  border-radius: 3px;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.type input {
+  font-size: 11px;
+  height: 25px;
+  width: 70px;
+  padding: 4px 6px 4px 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  border: none;
+}
+
+.type .drop-down {
+  position: absolute;
+
+  margin-top: 5px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 94%;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  font-weight: 300;
+  border-radius: 3px;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.sal input {
+  font-size: 11px;
+  height: 25px;
+  width: 130px;
+  padding: 4px 6px 4px 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  border: none;
+}
+.sal .drop-down {
+  position: absolute;
+  padding: 5px;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 160.8px;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  font-weight: 300;
+  border-radius: 3px;
+  z-index: 1;
+  cursor: pointer;
+}
+.comp-name input {
+  font-size: 11px;
+  height: 25px;
+  width: 130px;
+  padding: 4px 6px 4px 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  border: none;
+}
+
+.hover-div {
+  padding-left: 5px;
+  overflow-y: auto;
+  font-size: 14px;
+  margin-top: 4.5px;
+}
+.hover-div:hover {
+  background-color: rgb(155, 189, 239);
+  color: white;
+}
+
+.type .search-cont {
+}
