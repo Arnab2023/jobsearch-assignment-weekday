@@ -14,8 +14,40 @@ const Filter = ({ job, setData }) => {
     company: "",
   });
 
+  const [show, setShow] = useState({
+    experience: false,
+    role: false,
+
+    remote: false,
+    salary: false,
+  });
+
+  const detailObject = {
+    experience: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+    remote: ["Remote", "In-office"],
+    salary: ["0L", "10L", "20L", "30L", "40L", "50L", "60L", "70L"],
+  };
+
   const changeHandle = (e, option) => {
     setContent((prev) => ({ ...prev, [option]: e.target.value }));
+  };
+
+  const handleShow = (option) => {
+    setShow((prev) => ({ ...prev, [option]: !prev[option] }));
+  };
+
+  const dropChange = (option) => {
+    if (content[option].length !== 0) {
+      let x = content[option];
+      const list = detailObject[option].filter((str) => str.includes(x));
+      if (list.length === 0) {
+        return ["No Option"];
+      } else {
+        return list;
+      }
+    } else {
+      return detailObject[option];
+    }
   };
 
   return (
@@ -53,10 +85,31 @@ const Filter = ({ job, setData }) => {
               onChange={(e) => changeHandle(e, "experience")}
             />
 
-            <div className="icon">
+            <div
+              className="icon"
+              onClick={() => {
+                handleShow("experience");
+              }}
+            >
               <KeyboardArrowDownIcon sx={{ color: "black" }} />
             </div>
           </div>
+          {show.experience && (
+            <div className="drop-down">
+              {dropChange("experience").map((item, index) => (
+                <p
+                  className="hover-div"
+                  key={index}
+                  onClick={() => {
+                    setContent((prev) => ({ ...prev, experience: item }));
+                    handleShow("experience");
+                  }}
+                >
+                  {item}
+                </p>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* --------------------------------------------------- Type---------------------------------------------------------------------------- */}
@@ -71,10 +124,31 @@ const Filter = ({ job, setData }) => {
               onChange={(e) => changeHandle(e, "remote")}
             />
 
-            <div className="icon">
+            <div
+              className="icon"
+              onClick={() => {
+                handleShow("remote");
+              }}
+            >
               <KeyboardArrowDownIcon sx={{ color: "black" }} />
             </div>
           </div>
+          {show.remote && (
+            <div className="drop-down">
+              {dropChange("remote").map((item, index) => (
+                <p
+                  className="hover-div"
+                  key={index}
+                  onClick={() => {
+                    setContent((prev) => ({ ...prev, remote: "" }));
+                    handleShow("remote");
+                  }}
+                >
+                  {item}
+                </p>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* --------------------------------------------------- Salary ------------------------------------------------------------------------- */}
@@ -88,10 +162,31 @@ const Filter = ({ job, setData }) => {
               onChange={(e) => changeHandle(e, "salary")}
             />
 
-            <div className="icon">
+            <div
+              className="icon"
+              onClick={() => {
+                handleShow("salary");
+              }}
+            >
               <KeyboardArrowDownIcon sx={{ color: "black" }} />
             </div>
           </div>
+          {show.salary && (
+            <div className="drop-down">
+              {dropChange("salary").map((item, index) => (
+                <p
+                  className="hover-div"
+                  key={index}
+                  onClick={() => {
+                    setContent((prev) => ({ ...prev, salary: item }));
+                    handleShow("salary");
+                  }}
+                >
+                  {item}
+                </p>
+              ))}
+            </div>
+          )}
         </div>
         {/* --------------------------------------------------- Comp-Name ---------------------------------------------------------------------- */}
         <div className="comp-name fill">
