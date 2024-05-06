@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
-
+import Modal from "./Modal/Modal";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import { Card } from "@mui/material";
@@ -8,9 +8,15 @@ import "./searchpage.css";
 import axios from "axios";
 
 const SearchPage = () => {
+  const [modal, setModal] = useState(false);
   const [job, setJob] = useState([]);
+
   const [offset, setOffset] = useState(10);
   const [totalCount, setTotalCount] = useState(0);
+
+  const handleModal = () => {
+    setModal((prev) => !prev);
+  };
 
   const capitalizeFirstLetter = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -42,13 +48,13 @@ const SearchPage = () => {
     const { data } = await axios.post(
       "https://api.weekday.technology/adhoc/getSampleJdJSON",
       {
-        limit: 9,
+        limit: 12,
         offset: offset,
       }
     );
 
     setJob((prev) => [...prev, ...data.jdList]);
-    setOffset((prev) => prev + 10);
+    setOffset((prev) => prev + 12);
   };
 
   useEffect(() => {
@@ -57,6 +63,7 @@ const SearchPage = () => {
 
   return (
     <div className="container">
+      {modal && <Modal setModal={setModal} />}
       <InfiniteScroll
         className="content"
         dataLength={job?.length || []}
@@ -98,7 +105,9 @@ const SearchPage = () => {
             <div className="center">
               <p className="comp-text">
                 {checkLength(item?.jobDetailsFromCompany)}
-                <span className={`click `}></span>
+                <span className={`click `} onClick={handleModal}>
+                  View {modal ? "less..." : "job"}
+                </span>
               </p>
               <div className="exp">
                 <p>Minimum experience</p>

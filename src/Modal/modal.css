@@ -1,0 +1,62 @@
+.modal-cont {
+  position: fixed;
+  display: flex;
+  top: 0px;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow: auto;
+  z-index: 20;
+  width: 100%;
+}
+
+.modal {
+  position: absolute;
+  background-color: white;
+  display: flex;
+  width: 786.767px;
+  margin: auto;
+  flex-direction: column;
+  height: 600.8px;
+  z-index: 30;
+  border-radius: 5px;
+  overflow-y: auto;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 400;
+  height: auto;
+  margin-top: 10px;
+}
+
+.abt {
+  margin-top: 25px;
+  margin-left: 10px;
+  font-size: 14px;
+  color: #282c3f;
+}
+
+.abt-text {
+  margin-left: 10px;
+  line-height: 16px;
+  font-size: 11px;
+  font-weight: 200;
+  margin-right: 10px;
+  margin-top: 5px;
+  white-space: pre-wrap;
+  margin-bottom: 12px;
+}
+
+.abt-role {
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+.space {
+  margin-top: 20px;
+}
