@@ -1,0 +1,193 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap");
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Lexend;
+}
+
+.card-grids {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card-grid {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+.card {
+  max-width: 360px; /* Adjust card width as needed */
+  height: 567.713px;
+  box-shadow: rgba(0, 0, 0, 0.8) 20px 10px 20px 10px;
+  padding: 5px;
+  margin: 5px;
+  /* border-radius: 20px; */
+}
+.card:hover {
+  transform: matrix(1.01, 0, 0, 1.01, 0, 0);
+  transition: all 0.2s ease-in-out 0s;
+}
+.posted {
+  margin-top: 10px;
+  margin-left: 10px;
+  height: 20.1px;
+  width: 120px;
+  border-radius: 10px;
+  border: 1px solid #e6e6e6;
+  font-size: 10px;
+  padding: 4px 6px 4px 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.job-header {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
+}
+.job-title h2 {
+  font-size: 13px;
+  color: #8b8b8b;
+  line-height: 1.5;
+  margin-left: 15px;
+  margin-top: 10px;
+}
+.job-title p {
+  font-size: 14px;
+  line-height: 21px;
+  margin-left: 15px;
+  font-weight: 250;
+}
+.job-title span {
+  margin-top: 10px;
+  margin-left: 15px;
+  font-size: 11px;
+  font-weight: 500;
+}
+.job-image {
+  height: 30px;
+  width: 30px;
+
+  margin-left: 15px;
+  margin-top: 10px;
+  border: 1px #e6e6e6;
+}
+.est-salary {
+  font-size: 14px;
+  color: #282c3f;
+  font-weight: 200;
+  margin-left: 15px;
+}
+.comp {
+  font-size: 16px;
+  font-weight: 500;
+  margin-left: 15px;
+  margin-top: 20px;
+  color: #282c3f;
+}
+.abt-us {
+  font-weight: 500;
+  font-size: 14px;
+  margin-top: 5px;
+  margin-left: 15px;
+}
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.comp-text {
+  font-size: 14px;
+  color: #8b8b8b;
+  margin-left: 15px;
+  margin-right: 15px;
+  background-color: linear-gradient(to bottom, transparent, white);
+}
+.hide {
+  display: inline-block;
+  visibility: hidden;
+}
+.show {
+  visibility: visible;
+}
+.click {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #4943da;
+  cursor: pointer;
+  font-size: 200;
+
+  cursor: pointer;
+}
+.exp {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  font-size: 13px;
+  color: #8b8b8b;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.exp .min-exp {
+  font-weight: 300;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  color: #282c3f;
+}
+.app-btn {
+  background-color: #55efc4;
+  color: black;
+  height: 44px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  width: 330px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.ref-btn {
+  background-color: #4943da;
+  color: white;
+  height: 44px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  width: 330px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+/* kuch to backchodi */
+
+/* .content {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 10px;
+  margin-bottom: 50px;
+} */
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 70px;
+}
+
+/*-------------------------------------------------------- small devices media query ----------------------------------------*/
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .content {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 30px;
+  }
+}
